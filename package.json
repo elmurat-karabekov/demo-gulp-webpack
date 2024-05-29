@@ -1,0 +1,32 @@
+{
+  "name": "aa",
+  "version": "1.0.0",
+  "main": "build/main.js",
+  "scripts": {
+    "editorconfig": "editorconfig-checker --exclude '.git|node_modules|.DS_Store|.vscode|dist|build'",
+    "check": "prettier --check './src/**/*.{pug,scss,html,css,js}'",
+    "format": "prettier --write './src/**/*.{pug,scss,html,css,js}'",
+    "lint": "stylelint './src/**/*.{css,scss}'",
+    "lintfix": "stylelint './src/**/*.{css,scss}' --fix",
+    "checkAll": "npm run check && npm run lint",
+    "fixAll": "npm run format && npm run lintfix"
+  },
+  "keywords": [],
+  "author": "Elmurat Karabekov",
+  "license": "ISC",
+  "description": "Gulp+Webpack+Pug+SCSS",
+  "devDependencies": {
+    "browser-sync": "^3.0.2",
+    "del": "^7.1.0",
+    "editorconfig-checker": "^5.1.5",
+    "gulp": "^5.0.0",
+    "gulp-concat-css": "^3.1.0",
+    "gulp-plumber": "^1.2.1",
+    "prettier": "3.2.5",
+    "stylelint": "^16.6.1",
+    "stylelint-config-standard-scss": "^13.1.0"
+  },
+  "browserlist": [
+    "last 5 versions"
+  ]
+}
