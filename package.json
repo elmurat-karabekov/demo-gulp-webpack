@@ -29,7 +29,7 @@
     "gulp-changed": "^5.0.2",
     "gulp-concat-css": "^3.1.0",
     "gulp-file-include": "^2.3.0",
-    "gulp-imagemin": "^9.1.0",
+    "gulp-imagemin": "^7.1.0",
     "gulp-notify": "^4.0.0",
     "gulp-plumber": "^1.2.1",
     "gulp-postcss": "^10.0.0",

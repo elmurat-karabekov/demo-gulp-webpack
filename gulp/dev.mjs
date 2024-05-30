@@ -185,7 +185,9 @@ export function scss() {
 export function images() {
   return (
     gulp
-      .src(['./src/img/**/*', '!./src/img/svgicons/**/*'])
+      .src(['./src/img/**/*', '!./src/img/svgicons/**/*'], {
+        encoding: false,
+      })
       .pipe(changed('./build/img/'))
       .pipe(
         imagemin([
@@ -196,10 +198,18 @@ export function images() {
       )
       .pipe(rename({ extname: '.webp' }))
       .pipe(gulp.dest('./build/img/'))
-      .pipe(gulp.src(['./src/img/**/*', '!./src/img/svgicons/**/*']))
+      .pipe(
+        gulp.src(
+          [
+            './src/img/**/*.{jpg,png,svg,gif,ico,webp}',
+            '!./src/img/svgicons/**/*',
+          ],
+          { encoding: false } // without this jpg images are not copied properly, mb bug
+        )
+      )
       .pipe(changed('./build/img/'))
       // .pipe(imagemin({ verbose: true }))
-      .pipe(gulp.dest('./build/img/'))
+      .pipe(gulp.dest('./build/img'))
       .pipe(server.reload({ stream: true }))
   );
 }
@@ -235,11 +245,11 @@ export function svgSymbolSprite() {
     .pipe(server.reload({ stream: true }));
 }
 
-export function files() {
+export function fonts() {
   return gulp
-    .src('./src/files/**/*')
-    .pipe(changed('./build/files/'))
-    .pipe(gulp.dest('./build/files/'))
+    .src('./src/fonts/**/*')
+    .pipe(changed('./build/fonts/'))
+    .pipe(gulp.dest('./build/fonts/'))
     .pipe(server.reload({ stream: true }));
 }
 
@@ -247,7 +257,7 @@ export function watchFiles() {
   gulp.watch(['./src/scss/**/*.scss'], scss);
   gulp.watch(['./src/html/**/*.html', './src/html/**/*.json'], html);
   gulp.watch(['./src/img/**/*'], images);
-  gulp.watch(['./src/files/**/*'], files);
+  gulp.watch(['./src/fonts/**/*'], fonts);
   gulp.watch(['./src/js/**/*.js'], js);
   gulp.watch(
     ['./src/img/svgicons/*'],
@@ -269,7 +279,13 @@ export function clean() {
 
 export const build = gulp.series(
   clean,
-  gulp.parallel(html, scss, js, images, svgSymbolSprite, svgStackSprite)
+  gulp.parallel(
+    html,
+    scss,
+    js,
+    images,
+    gulp.series(svgSymbolSprite, svgStackSprite)
+  )
 );
 
 export const watch = gulp.series(build, gulp.parallel(watchFiles, serve));

@@ -18,7 +18,7 @@ export function html() {
     .pipe(plumber())
     .on('data', function (file) {
       const buferFile = Buffer.from(
-        htmlMinify.minify(file.contents.toString(), options),
+        htmlMinify.minify(file.contents.toString(), options)
       );
       return (file.contents = buferFile);
     })
