@@ -1,17 +1,15 @@
 .mobile-nav {
   overflow-y: auto;
   position: fixed;
+
   // top: 0;
   top: -100%;
   width: 100%;
   height: 100%;
   z-index: 99;
-
   padding: 106px 20px 56px;
-
   display: flex;
   flex-direction: column;
-
   background: #fff;
   transition: all 0.2s ease-in;
 }
@@ -61,16 +59,14 @@
 }
 
 .mobile-sub {
-  max-height: 0px;
+  max-height: 0;
   overflow: hidden;
-
   transition: all 0.2s ease-in;
 }
 
 .mobile-sub-list {
   display: grid;
   gap: 16px;
-
   padding: 24px 0 16px 33px;
 }
 
@@ -96,10 +92,8 @@
 
 .mobile-nav__btns {
   margin-top: auto;
-
   border-top: 1px solid var(--neutral-graycbcbcb);
   padding-top: 14px;
-
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;

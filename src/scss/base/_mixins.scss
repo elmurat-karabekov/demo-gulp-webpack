@@ -1,17 +1,17 @@
 @mixin mediaBg() {
-  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  @media (min-device-pixel-ratio: 2), (resolution >= 192dpi) {
     @content;
   }
 }
 
 @mixin tablet() {
-  @media (max-width: 1274px) {
+  @media (width <= 1274px) {
     @content;
   }
 }
 
 @mixin mobile() {
-  @media (max-width: 780px) {
+  @media (width <= 780px) {
     @content;
   }
 }

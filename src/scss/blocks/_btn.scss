@@ -1,13 +1,10 @@
 .btn,
 a.btn {
   display: inline-block;
-
   padding: 8px;
   min-width: 185px;
   height: 40px;
-
   background: var(--white);
-
   font-family: var(--font-family);
   font-weight: 400;
   font-size: 14px;
@@ -15,7 +12,6 @@ a.btn {
   text-transform: capitalize;
   text-align: center;
   color: var(--black);
-
   transition: all 0.2s ease-in;
 
   &:hover {
@@ -45,17 +41,13 @@ a.btn {
 
 a.btn-outline,
 .btn-outline {
-  display: inline-block;
-
   border: 1px solid var(--primary-primary-600);
   padding: 8px 16px;
   height: 40px;
-
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 4px;
-
   font-family: var(--font-family);
   font-weight: 400;
   font-size: 14px;

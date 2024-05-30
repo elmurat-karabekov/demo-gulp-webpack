@@ -1,24 +1,22 @@
 /* Nav Icon */
 .mobile-nav-btn {
   --time: 0.1s;
-
   --width: 18px;
   --height: 12px;
-
   --line-height: 2px;
   --spacing: 3px;
-
   --color: #0c0c0c;
   --radius: 0px;
 
   /* Fixed height and width */
+
   /* height: var(--height); */
+
   /* width: var(--width); */
 
   /* Dynamic height and width */
   height: calc(var(--line-height) * 3 + var(--spacing) * 2);
   width: var(--width);
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -36,13 +34,10 @@
 .nav-icon::after {
   content: '';
   display: block;
-
   position: absolute;
   left: 0;
-
   width: var(--width);
   height: var(--line-height);
-
   border-radius: var(--radius);
   background-color: var(--color);
   transition:
@@ -84,6 +79,7 @@
 
 .mobile-nav-btn {
   z-index: 999;
+
   // display: none;
 }
 

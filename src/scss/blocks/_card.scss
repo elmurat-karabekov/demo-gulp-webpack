@@ -16,7 +16,7 @@
 
 .card__btn-fav {
   &:hover .icon--favorite {
-    stroke: rgb(227, 50, 121);
+    stroke: rgb(227 50 121);
   }
 
   &--selected .icon--favorite {
@@ -31,7 +31,6 @@
 
 .card__body {
   padding: 5.5px 8px;
-
   display: grid;
   gap: 8px;
 
@@ -60,8 +59,8 @@
   a::after {
     content: '';
     position: absolute;
-    left: 0px;
-    top: 0px;
+    left: 0;
+    top: 0;
     width: 100%;
     height: 100%;
   }
@@ -93,7 +92,6 @@
 
 .card__price {
   text-align: right;
-
   font-family: var(--font-family);
   font-weight: 700;
   font-size: 16px;

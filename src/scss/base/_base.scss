@@ -1,9 +1,9 @@
-@import url(https://fonts.googleapis.com/css?family=Montserrat:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic);
+@import "https://fonts.googleapis.com/css?family=Montserrat:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic";
 
 html {
   // scroll to anchors in page instead of jumping (a href="index.html#contacts)
   scroll-behavior: smooth;
-  background-color: rgb(39, 39, 39);
+  background-color: rgb(39 39 39);
 }
 
 body {
