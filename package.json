@@ -16,17 +16,56 @@
   "license": "ISC",
   "description": "Gulp+Webpack+Pug+SCSS",
   "devDependencies": {
+    "@babel/core": "^7.24.6",
+    "@babel/preset-env": "^7.24.6",
+    "autoprefixer": "^10.4.19",
     "browser-sync": "^3.0.2",
+    "css-loader": "^7.1.2",
+    "cssnano": "^7.0.1",
     "del": "^7.1.0",
     "editorconfig-checker": "^5.1.5",
     "gulp": "^5.0.0",
+    "gulp-babel": "^8.0.0",
+    "gulp-changed": "^5.0.2",
     "gulp-concat-css": "^3.1.0",
+    "gulp-file-include": "^2.3.0",
+    "gulp-imagemin": "^9.1.0",
+    "gulp-notify": "^4.0.0",
     "gulp-plumber": "^1.2.1",
+    "gulp-postcss": "^10.0.0",
+    "gulp-prettier": "^6.0.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-replace": "^1.1.4",
+    "gulp-sass": "^5.1.0",
+    "gulp-sass-glob": "^1.1.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-svg-sprite": "^2.0.3",
+    "gulp-typograf": "^4.1.0",
+    "gulp-webp-retina-html": "^1.2.0",
+    "html-minifier": "^4.0.0",
+    "imagemin-webp": "^8.0.0",
+    "postcss": "^8.4.38",
+    "postcss-combine-media-query": "^1.0.1",
     "prettier": "3.2.5",
+    "sass": "^1.77.3",
+    "style-loader": "^4.0.0",
     "stylelint": "^16.6.1",
-    "stylelint-config-standard-scss": "^13.1.0"
+    "stylelint-config-standard-scss": "^13.1.0",
+    "webpack": "^5.91.0",
+    "webpack-stream": "^7.0.0"
   },
-  "browserlist": [
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
+  },
+  "browserslist": [
     "last 5 versions"
-  ]
+  ],
+  "dependencies": {
+    "@fancyapps/fancybox": "^3.5.7",
+    "@fancyapps/ui": "^5.0.36",
+    "avif-webp-checker": "^1.0.0",
+    "swiper": "^11.1.4"
+  }
 }
