@@ -56,12 +56,12 @@ export function html() {
       replace(/<img(?:.|\n|\r)*?>/g, function (match) {
         return match.replace(/\r?\n|\r/g, '').replace(/\s{2,}/g, ' ');
       })
-    ) // Удаляет лишние пробелы и переводы строк внутри тега <img>
+    ) //удаляет лишние пробелы и переводы строк внутри тега <img>
     .pipe(
       replace(
         /(?<=src=|href=|srcset=)(['"])(\.(\.)?\/)*(img|images|fonts|css|scss|sass|js|files|audio|video)(\/[^\/'"]+(\/))?([^'"]*)\1/gi,
         '$1./$4$5$7$1'
-      ) // Правка относительных путей, для картинок
+      )
     )
     .pipe(typograf(options.typografOptions))
     .pipe(webpHTML(options.webpHTMLOptions))
@@ -82,7 +82,7 @@ export function scss() {
       replace(
         /(['"]?)(\.\.\/)+(img|images|fonts|css|scss|sass|js|files|audio|video)(\/[^\/'"]+(\/))?([^'"]*)\1/gi,
         '$1$2$3$4$6$1'
-      ) // Правка относительных путей, для картинок
+      )
     )
     .pipe(sourceMaps.write())
     .pipe(gulp.dest('./build/css/'))
