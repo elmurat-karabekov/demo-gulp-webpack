@@ -35,7 +35,7 @@ Changes:
 Dev build `npm run dev` - faster process, not ready for production, (+
 livereload)
 
-Prod build `npm run dist` - slower process, ready for production code (minified,
+Prod build `npm run docs` - slower process, ready for production code (minified,
 autoprefixed, optimized)
 
 ### Фикс от 25.03.2024

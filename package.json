@@ -4,7 +4,7 @@
   "main": "build/main.js",
   "scripts": {
     "dev": "gulp",
-    "dist": "gulp dist",
+    "docs": "gulp docs",
     "editorconfig": "editorconfig-checker --exclude '.git|node_modules|.DS_Store|.vscode|dist|build'",
     "check": "prettier --check './src/**/*.{pug,scss,html,css,js}'",
     "format": "prettier --write './src/**/*.{pug,scss,html,css,js}'",
