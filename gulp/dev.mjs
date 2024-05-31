@@ -1,7 +1,6 @@
 // global
 import gulp from 'gulp';
 import plumber from 'gulp-plumber'; // Prevent pipe breaking caused by errors from gulp plugins
-import notify from 'gulp-notify';
 import changed, { compareContents } from 'gulp-changed'; // Only pass through changed files
 import replace from 'gulp-replace'; // A string replace plugin for gulp
 
@@ -13,14 +12,6 @@ import prettier from 'gulp-prettier'; // Format files with Prettier
 // Replaces the <img> tag with <picture> <source> <img> in HTML files.
 // **/images/ should include retina version of images @2x.[ext]
 import webpHTML from 'gulp-webp-retina-html';
-
-// css related
-import concatCss from 'gulp-concat-css';
-
-import postcss from 'postcss';
-import autoprefixer from 'autoprefixer';
-import mediaquery from 'postcss-combine-media-query';
-import cssnano from 'cssnano';
 
 // sass related
 import gulpSass from 'gulp-sass'; // sass plugin for gulp
@@ -48,92 +39,8 @@ import browserSync from 'browser-sync';
 const server = browserSync.create();
 
 import { deleteAsync } from 'del';
-import webpackStream from 'webpack-stream';
 
-// function returns gulp-notify config object
-const plumberNotify = title => {
-  return {
-    errorHandler: notify.onError({
-      title: title,
-      message: 'Error <%= error.message %>',
-      sound: false,
-    }),
-  };
-};
-
-const fileIncludeSettings = {
-  prefix: '@@',
-  basepath: '@file',
-};
-
-const typografOptions = {
-  locale: ['ru', 'en-US'],
-  htmlEntity: { type: 'digit' },
-  safeTags: [
-    ['<\\?php', '\\?>'],
-    ['<no-typography>', '</no-typography>'],
-  ],
-};
-
-const webpHTMLOptions = {
-  extensions: ['jpg', 'jpeg', 'png', 'gif', 'webp'],
-  retina: {
-    1: '',
-    2: '@2x',
-  },
-};
-
-const prettierOptions = {
-  tabWidth: 4,
-  useTabs: true,
-  printWidth: 182,
-  trailingComma: 'es5',
-  bracketSpacing: false,
-};
-
-const postcssPlugins = [autoprefixer(), mediaquery(), cssnano()];
-
-const svgStack = {
-  mode: {
-    stack: {
-      example: true,
-    },
-  },
-  shape: {
-    transform: [
-      {
-        svgo: {
-          js2svg: { indent: 4, pretty: true },
-        },
-      },
-    ],
-  },
-};
-
-const svgSymbol = {
-  mode: {
-    symbol: {
-      sprite: '../sprite.symbol.svg',
-    },
-  },
-  shape: {
-    transform: [
-      {
-        svgo: {
-          js2svg: { indent: 4, pretty: true },
-          plugins: [
-            {
-              name: 'removeAttrs',
-              params: {
-                attrs: '(fill|stroke)',
-              },
-            },
-          ],
-        },
-      },
-    ],
-  },
-};
+import * as options from './configs.mjs';
 
 export function html() {
   return gulp
@@ -143,8 +50,8 @@ export function html() {
       '!./src/html/docs/**/*.*',
     ])
     .pipe(changed('./build/', { hasChanged: compareContents }))
-    .pipe(plumber(plumberNotify('HTML')))
-    .pipe(fileInclude(fileIncludeSettings))
+    .pipe(plumber(options.plumberNotify('HTML')))
+    .pipe(fileInclude(options.fileIncludeSettings))
     .pipe(
       replace(/<img(?:.|\n|\r)*?>/g, function (match) {
         return match.replace(/\r?\n|\r/g, '').replace(/\s{2,}/g, ' ');
@@ -156,9 +63,9 @@ export function html() {
         '$1./$4$5$7$1'
       ) // Правка относительных путей, для картинок
     )
-    .pipe(typograf(typografOptions))
-    .pipe(webpHTML(webpHTMLOptions))
-    .pipe(prettier(prettierOptions))
+    .pipe(typograf(options.typografOptions))
+    .pipe(webpHTML(options.webpHTMLOptions))
+    .pipe(prettier(options.prettierOptions))
     .pipe(gulp.dest('./build'))
     .pipe(server.reload({ stream: true }));
 }
@@ -167,7 +74,7 @@ export function scss() {
   return gulp
     .src('./src/scss/*.scss')
     .pipe(changed('./build/css/'))
-    .pipe(plumber(plumberNotify('SCSS')))
+    .pipe(plumber(options.plumberNotify('SCSS')))
     .pipe(sourceMaps.init())
     .pipe(sassGlob())
     .pipe(sass())
@@ -219,9 +126,9 @@ export function js() {
     gulp
       .src('./src/js/*.js')
       .pipe(changed('./build/js/'))
-      .pipe(plumber(plumberNotify('JS')))
+      .pipe(plumber(options.plumberNotify('JS')))
       // .pipe(babel()) --
-      .pipe(webpackStream(config))
+      .pipe(webpack(config))
       .pipe(gulp.dest('./build/js/'))
       .pipe(server.reload({ stream: true }))
   );
@@ -230,8 +137,8 @@ export function js() {
 export function svgStackSprite() {
   return gulp
     .src('./src/img/svgicons/**/*.svg')
-    .pipe(plumber(plumberNotify('SVG:dev')))
-    .pipe(svgSprite(svgStack))
+    .pipe(plumber(options.plumberNotify('SVG:dev')))
+    .pipe(svgSprite(options.svgStack))
     .pipe(gulp.dest('./build/img/svgsprite/'))
     .pipe(server.reload({ stream: true }));
 }
@@ -239,8 +146,8 @@ export function svgStackSprite() {
 export function svgSymbolSprite() {
   return gulp
     .src('./src/img/svgicons/**/*.svg')
-    .pipe(plumber(plumberNotify('SVG:dev')))
-    .pipe(svgSprite(svgSymbol))
+    .pipe(plumber(options.plumberNotify('SVG:dev')))
+    .pipe(svgSprite(options.svgSymbol))
     .pipe(gulp.dest('./build/img/svgsprite/'))
     .pipe(server.reload({ stream: true }));
 }

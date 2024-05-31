@@ -1,3 +1,4 @@
-Dev build `build` - faster process, not ready for production
+Dev build `npm run build` - faster process, not ready for production
 
-Prod build `dist/` - slower process, ready for production code
+Prod build `npm run dist` - slower process, ready for production code (minified,
+autoprefixed, optimized)
