@@ -2,7 +2,7 @@
 
 [![Editorconfig](https://github.com/elmurat-karabekov/demo-gulp-webpack/actions/workflows/editorconfig.yaml/badge.svg)](https://github.com/elmurat-karabekov/demo-gulp-webpack/actions/workflows/editorconfig.yaml)
 
-[Demo](https://elmurat-karabekov.github.io/demo-gulp-webpack/){:target="\_blank"}
+[Demo](https://elmurat-karabekov.github.io/demo-gulp-webpack/){:target="_blank"}
 
 This build is inspired by `ВебКадеми`
 [instructions](https://www.youtube.com/watch?v=D_HW-tvyKKE&list=PLFeMECgJUXAQdzJtf2h9hliUmQD80MpIq)
