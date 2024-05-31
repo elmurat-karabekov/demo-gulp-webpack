@@ -45,7 +45,7 @@ export function html() {
       '!./**/blocks/**/*.*',
       '!./src/html/docs/**/*.*',
     ])
-    .pipe(changed('./dist/'))
+    .pipe(changed('./docs/'))
     .pipe(plumber(options.plumberNotify('HTML')))
     .pipe(fileInclude(options.fileIncludeSettings))
     .pipe(
@@ -61,7 +61,7 @@ export function html() {
       );
       return (file.contents = buferFile);
     })
-    .pipe(gulp.dest('dist/'))
+    .pipe(gulp.dest('docs/'))
     .pipe(browserSync.reload({ stream: true }));
 }
 
@@ -69,7 +69,7 @@ export function scss() {
   return (
     gulp
       .src('./src/scss/*.scss')
-      .pipe(changed('./dist/css/'))
+      .pipe(changed('./docs/css/'))
       .pipe(plumber(options.plumberNotify('SCSS')))
       .pipe(sassGlob()) /* Первый */
       .pipe(sass()) /* Второй */
@@ -85,14 +85,14 @@ export function scss() {
         )
       )
       .pipe(postcss(options.postcssPlugins))
-      .pipe(gulp.dest('./dist/css/'))
+      .pipe(gulp.dest('./docs/css/'))
   );
 }
 
 export function images() {
   return gulp
     .src(['./src/img/**/*', '!./src/img/svgicons/**/*'], { encoding: false })
-    .pipe(changed('./dist/img/'))
+    .pipe(changed('./docs/img/'))
     .pipe(
       imagemin([
         imageminWebp({
@@ -101,9 +101,9 @@ export function images() {
       ])
     )
     .pipe(rename({ extname: '.webp' }))
-    .pipe(gulp.dest('./dist/img/'))
-    .pipe(gulp.src('./src/img/**/*', { encoding: false }))
-    .pipe(changed('./dist/img/'))
+    .pipe(gulp.dest('./docs/img/'))
+    .pipe(gulp.src('./src/img/**/*'), { encoding: false })
+    .pipe(changed('./docs/img/'))
     .pipe(
       imagemin(
         [
@@ -114,17 +114,17 @@ export function images() {
         { verbose: true }
       )
     )
-    .pipe(gulp.dest('./dist/img/'));
+    .pipe(gulp.dest('./docs/img/'));
 }
 
 export function js() {
   return gulp
     .src('./src/js/*.js')
-    .pipe(changed('./dist/js/'))
+    .pipe(changed('./docs/js/'))
     .pipe(plumber(options.plumberNotify('JS')))
     .pipe(babel())
     .pipe(webpack(config))
-    .pipe(gulp.dest('./dist/js/'))
+    .pipe(gulp.dest('./docs/js/'))
     .pipe(server.reload({ stream: true }));
 }
 
@@ -133,7 +133,7 @@ export function svgStackSprite() {
     .src('./src/img/svgicons/**/*.svg')
     .pipe(plumber(options.plumberNotify('SVG:dev')))
     .pipe(svgSprite(options.svgStack))
-    .pipe(gulp.dest('./dist/img/svgsprite/'))
+    .pipe(gulp.dest('./docs/img/svgsprite/'))
     .pipe(server.reload({ stream: true }));
 }
 
@@ -142,15 +142,15 @@ export function svgSymbolSprite() {
     .src('./src/img/svgicons/**/*.svg')
     .pipe(plumber(options.plumberNotify('SVG:dev')))
     .pipe(svgSprite(options.svgSymbol))
-    .pipe(gulp.dest('./dist/img/svgsprite/'))
+    .pipe(gulp.dest('./docs/img/svgsprite/'))
     .pipe(server.reload({ stream: true }));
 }
 
 export function fonts() {
   return gulp
     .src('./src/fonts/**/*')
-    .pipe(changed('./dist/fonts/'))
-    .pipe(gulp.dest('./dist/fonts/'))
+    .pipe(changed('./docs/fonts/'))
+    .pipe(gulp.dest('./docs/fonts/'))
     .pipe(server.reload({ stream: true }));
 }
 
@@ -169,16 +169,16 @@ export function watchFiles() {
 export function serve() {
   server.init({
     server: {
-      baseDir: './dist',
+      baseDir: './docs',
     },
   });
 }
 
 export function clean() {
-  return deleteAsync('dist');
+  return deleteAsync('docs');
 }
 
-export const dist = gulp.series(
+export const docs = gulp.series(
   clean,
   gulp.parallel(
     html,

@@ -2,7 +2,7 @@
 
 [![Editorconfig](https://github.com/elmurat-karabekov/demo-gulp-webpack/actions/workflows/editorconfig.yaml/badge.svg)](https://github.com/elmurat-karabekov/demo-gulp-webpack/actions/workflows/editorconfig.yaml)
 
-[Demo]()
+[Demo](https://elmurat-karabekov.github.io/demo-gulp-webpack/)
 
 This build is inspired by `ВебКадеми`
 [instructions](https://www.youtube.com/watch?v=D_HW-tvyKKE&list=PLFeMECgJUXAQdzJtf2h9hliUmQD80MpIq)
@@ -30,7 +30,7 @@ Changes:
 
 ## Instructions
 
-`npm ci` - intall
+`npm ci` - install project
 
 Dev build `npm run dev` - faster process, not ready for production, (+
 livereload)
