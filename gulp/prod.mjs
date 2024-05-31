@@ -102,7 +102,7 @@ export function images() {
     )
     .pipe(rename({ extname: '.webp' }))
     .pipe(gulp.dest('./dist/img/'))
-    .pipe(gulp.src('./src/img/**/*'), { encoding: false })
+    .pipe(gulp.src('./src/img/**/*', { encoding: false }))
     .pipe(changed('./dist/img/'))
     .pipe(
       imagemin(
