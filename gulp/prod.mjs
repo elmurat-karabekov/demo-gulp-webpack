@@ -52,13 +52,11 @@ export function html() {
       replace(/<img(?:.|\n|\r)*?>/g, function (match) {
         return match.replace(/\r?\n|\r/g, '').replace(/\s{2,}/g, ' ');
       })
-    )
+    ) //удаляет лишние пробелы и переводы строк внутри тега <img>
     .pipe(
       replace(
-        /<img[^>]+src=["'](\.\/\.\.\/\.\.\/img\/[^"']+)["'][^>]*>/g,
-        function (match, p1) {
-          return match.replace(p1, p1.replace('./../../', './'));
-        }
+        /(?<=src=|href=|srcset=)(['"])(\.(\.)?\/)*(img|images|fonts|css|scss|sass|js|files|audio|video)(\/[^\/'"]+(\/))?([^'"]*)\1/gi,
+        '$1./$4$5$7$1'
       )
     )
     .pipe(typograf(options.typografOptions))
@@ -89,10 +87,7 @@ export function scss() {
       .pipe(
         replace(
           /(['"]?)(\.\.\/)+(img|images|fonts|css|scss|sass|js|files|audio|video)(\/[^\/'"]+(\/))?([^'"]*)\1/gi,
-          function (match, p1, p2, p3, p4, p5, p6) {
-            // Correct the image paths from `../../` to `./`
-            return p1 + './' + p3 + (p4 || '') + (p6 || '') + p1;
-          }
+          '$1$2$3$4$6$1'
         )
       )
       .pipe(postcss(options.postcssPlugins))
