@@ -1,5 +1,7 @@
 # Demo project with Gulp
 
+[![Editorconfig](https://github.com/elmurat-karabekov/demo-gulp-webpack/actions/workflows/editorconfig.yaml/badge.svg)](https://github.com/elmurat-karabekov/demo-gulp-webpack/actions/workflows/editorconfig.yaml)
+
 [Demo]()
 
 This build is inspired by `ВебКадеми`
