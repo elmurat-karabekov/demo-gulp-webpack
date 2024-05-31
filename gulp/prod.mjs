@@ -97,7 +97,9 @@ export function scss() {
 
 export function images() {
   return gulp
-    .src(['./src/img/**/*', '!./src/img/svgicons/**/*'], { encoding: false })
+    .src(['./src/img/**/*', '!./src/img/svgicons/**/*'], {
+      encoding: false,
+    })
     .pipe(changed('./docs/img/'))
     .pipe(
       imagemin([
@@ -108,7 +110,15 @@ export function images() {
     )
     .pipe(rename({ extname: '.webp' }))
     .pipe(gulp.dest('./docs/img/'))
-    .pipe(gulp.src('./src/img/**/*'), { encoding: false })
+    .pipe(
+      gulp.src(
+        [
+          './src/img/**/*.{jpg,png,svg,gif,ico,webp}',
+          '!./src/img/svgicons/**/*',
+        ],
+        { encoding: false } // without this jpg images are not copied properly, mb bug
+      )
+    )
     .pipe(changed('./docs/img/'))
     .pipe(
       imagemin(
@@ -120,7 +130,8 @@ export function images() {
         { verbose: true }
       )
     )
-    .pipe(gulp.dest('./docs/img/'));
+    .pipe(gulp.dest('./docs/img'))
+    .pipe(server.reload({ stream: true }));
 }
 
 export function js() {
